@@ -2254,7 +2254,6 @@ void init_new_task_load(struct task_struct *p)
 	p->wts.misfit = false;
 	p->wts.rtg_high_prio = false;
 	p->wts.unfilter = sysctl_sched_task_unfilter_period;
-	p->wts.cidx = 0;
 }
 
 void walt_task_dead(struct task_struct *p)
