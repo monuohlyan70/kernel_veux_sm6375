@@ -470,6 +470,9 @@ static void sugov_update_single(struct update_util_data *hook, u64 time,
 	bool busy;
 	unsigned int cached_freq = sg_policy->cached_raw_freq;
 
+	if (!sg_policy->tunables->pl && flags & SCHED_CPUFREQ_PL)
+		return;
+
 	sugov_iowait_boost(sg_cpu, time, flags);
 	sg_cpu->last_update = time;
 
