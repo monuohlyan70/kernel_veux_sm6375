@@ -2283,8 +2283,6 @@ void reset_task_stats(struct task_struct *p)
 	p->wts.demand_scaled = 0;
 	p->wts.pred_demand_scaled = 0;
 	p->wts.active_time = 0;
-	p->wts.cidx = 0;
-	p->wts.bucket_bitmask = 0;
 }
 
 void mark_task_starting(struct task_struct *p)
