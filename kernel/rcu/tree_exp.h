@@ -929,6 +929,8 @@ void synchronize_rcu_expedited(void)
 	/* Let the next expedited grace period start. */
 	mutex_unlock(&rcu_state.exp_mutex);
 
+	if (likely(!boottime))
+		destroy_work_on_stack(&rew.rew_work);
 	if (likely(!no_wq))
 		synchronize_rcu_expedited_destroy_work(&rew);
 }
