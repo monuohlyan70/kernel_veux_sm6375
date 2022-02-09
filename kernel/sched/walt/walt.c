@@ -1190,8 +1190,6 @@ static inline int busy_to_bucket(u32 normalized_rt)
 static u32 get_pred_busy(struct task_struct *p,
 				int start, u32 runtime, u16 bucket_bitmask)
 {
-	int i;
-	u8 *buckets = p->wts.busy_buckets;
 	u32 dmin, dmax;
 	u64 cur_freq_runtime = 0;
 	int first = NUM_BUSY_BUCKETS, final = NUM_BUSY_BUCKETS;
@@ -2281,6 +2279,7 @@ void reset_task_stats(struct task_struct *p)
 	p->wts.demand_scaled = 0;
 	p->wts.pred_demand_scaled = 0;
 	p->wts.active_time = 0;
+	p->wts.bucket_bitmask = 0;
 }
 
 void mark_task_starting(struct task_struct *p)
