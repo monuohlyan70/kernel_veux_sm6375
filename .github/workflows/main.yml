@@ -29,9 +29,9 @@ jobs:
         sudo apt install gcc-arm-linux-gnueabi -y
         sudo apt install binutils make python3 libssl-dev build-essential bc  bison flex zip unzip libssl-dev ca-certificates xz-utils mkbootimg cpio device-tree-compiler git git-lfs -y
         echo "Fetching LLVM tar"
-        wget https://cdn.kernel.org/pub/tools/llvm/files/llvm-16.0.6-x86_64.tar.xz 
+        wget https://cdn.kernel.org/pub/tools/llvm/files/llvm-17.0.6-x86_64.tar.xz 
         echo "Extracting tar"
-        tar -xJf llvm-16.0.6-x86_64.tar.xz
+        tar -xJf llvm-17.0.6-x86_64.tar.xz
         echo "Pull submodules"
         git submodule sync
         git submodule update --init --recursive
@@ -43,7 +43,7 @@ jobs:
     
     - name: Build Kernel
       run: |
-       export PATH=$(pwd)/llvm-16.0.6-x86_64/bin/:$PATH
+       export PATH=$(pwd)/llvm-17.0.6-x86_64/bin/:$PATH
        export ARCH=arm64
        export SUBARCH=arm64
        export KBUILD_BUILD_USER="NzTmPendi"
