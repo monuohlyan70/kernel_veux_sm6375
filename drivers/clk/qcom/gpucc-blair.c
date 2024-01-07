@@ -197,14 +197,14 @@ static struct clk_rcg2 gpu_cc_gmu_clk_src = {
 };
 
 static const struct freq_tbl ftbl_gpu_cc_gx_gfx3d_clk_src[] = {
-	F(266000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
-	F(390000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
-	F(490000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
-	F(650000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(315000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(443000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(540000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(676000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
 	F(700000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
-	F(770000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
-	F(840000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
-	F(900000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(778000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(850000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0),
+	F(900000000, P_GPU_CC_PLL0_OUT_EVEN, 2, 0, 0), // Not For Veux
 	{ }
 };
 
@@ -226,12 +226,12 @@ static struct clk_rcg2 gpu_cc_gx_gfx3d_clk_src = {
 		.vdd_class = &vdd_mx,
 		.num_rate_max = VDD_NUM,
 		.rate_max = (unsigned long[VDD_NUM]) {
-			[VDD_LOWER] = 266000000,
-			[VDD_LOW] = 390000000,
-			[VDD_LOW_L1] = 490000000,
-			[VDD_NOMINAL] = 650000000,
-			[VDD_NOMINAL_L1] = 770000000,
-			[VDD_HIGH] = 840000000,
+			[VDD_MIN] = 315000000,
+			[VDD_MIN] = 443000000,
+			[VDD_LOW] = 540000000,
+			[VDD_NOMINAL] = 676000000,
+			[VDD_HIGH] = 778000000,
+			[VDD_HIGH_L1] = 850000000,
 			[VDD_HIGH_L1] = 900000000},
 	},
 };
@@ -381,12 +381,12 @@ static struct clk_branch gpu_cc_gx_gfx3d_clk = {
 			.vdd_class = &vdd_gx,
 			.num_rate_max = VDD_NUM,
 			.rate_max = (unsigned long[VDD_NUM]) {
-				[VDD_LOWER] = 266000000,
-				[VDD_LOW] = 390000000,
-				[VDD_LOW_L1] = 490000000,
-				[VDD_NOMINAL] = 650000000,
-				[VDD_NOMINAL_L1] = 770000000,
-				[VDD_HIGH] = 840000000,
+				[VDD_MIN] = 315000000,
+				[VDD_MIN] = 443000000,
+				[VDD_LOW] = 540000000,
+				[VDD_NOMINAL] = 676000000,
+				[VDD_HIGH] = 778000000,
+				[VDD_HIGH_L1] = 850000000,
 				[VDD_HIGH_L1] = 900000000},
 		},
 	},
