@@ -1,0 +1,48 @@
+name: Build
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    name: Bulid Image
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        buildconfig: [ build.config.msm.veux ]
+    env:
+      CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
+      CCACHE_NOHASHDIR: "true"
+      CCACHE_MAXSIZE: "2G"
+      CCACHE_HARDLINK: "true"
+      KBUILD_BUILD_USER: "actions"
+      KBUILD_BUILD_HOST: "github.com"
+      
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    
+    - name: Setup dependencies
+      run: ./setup_toolchain.sh
+
+    - name: Setup ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        key: ${{ matrix.buildconfig }}
+
+    - name: Setup ThinLTO cache
+      uses: actions/cache@v4
+      with: 
+        path: ${{ github.workspace }}/out/.thinlto-cache
+        key: thinlto-${{ matrix.buildconfig }}-${{ github.run_id }}
+        restore-keys: thinlto-${{ matrix.buildconfig }}
+
+    - name: Run build
+      run: BUILD_CONFIG=${{ matrix.buildconfig }} build/build.sh CC="ccache clang"
+
+    - name: Upload zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: AnyKernel3
+        path: "AnyKernel3/"
