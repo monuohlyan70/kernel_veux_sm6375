@@ -1,0 +1,38 @@
+ARCH=arm64
+FILES="
+arch/arm64/boot/Image
+.config
+arch/arm64/boot/dts/vendor/qcom/blair.dtb
+include/config/kernel.release
+include/generated/compile.h
+"
+DIST_DIR=AnyKernel3
+
+LLVM=1
+LLVM_IAS=1
+CLANG_PREBUILT_BIN=llvm/bin
+BUILDTOOLS_PREBUILT_BIN=build/build-tools/path/linux-x86
+DEFCONFIG=veux_defconfig
+SKIP_CP_KERNEL_HDR=1
+SKIP_EXT_MODULES=1
+BUILD_INITRAMFS=0
+
+inject_ramdisk() {
+  ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+  -e RD_LZMA \
+  -e INITRAMFS_FORCE \
+  -e INITRAMFS_FORCE_RECOVERY \
+  --set-str INITRAMFS_SOURCE "source/usr/ramdisk.cpio" \
+  -e INITRAMFS_COMPRESSION_LZMA
+  (cd ${OUT_DIR} && make ${TOOL_ARGS} O=${OUT_DIR} "${cc[@]}" "${MAKE_ARGS[@]}" olddefconfig)
+}
+copy_ak3() {
+  set +e
+  cd ${DIST_DIR}
+  mv -f blair.dtb dtb
+  rm abi.prop test_mappings.zip
+  [[ -n $GITHUB_ACTION ]] && rm -rf .git/ || zip -r9 "AnyKernel3$(cat ../localversion).zip" * -x .git/
+}
+
+POST_DEFCONFIG_CMDS="inject_ramdisk"
+DIST_CMDS="copy_ak3"
