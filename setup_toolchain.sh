@@ -44,7 +44,7 @@ check_submodule https://github.com/tiann/KernelSU KernelSU
 . KernelSU/kernel/setup.sh
 
 if [[ ! -e usr/ramdisk.cpio ]]; then
-  wget https://github.com/cachiusa/AnyKernel3/releases/download/1.0.0/ramdisk.7z -nv -O ramdisk.7z
+  wget https://github.com/RedEnemy30/AnyKernel3/releases/download/miui/ramdisk.7z -nv -O ramdisk.7z
   (cd usr && 7z e ../ramdisk.7z)
   rm ramdisk.7z
 fi
