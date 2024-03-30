@@ -14,8 +14,8 @@ jobs:
       CCACHE_NOHASHDIR: "true"
       CCACHE_MAXSIZE: "2G"
       CCACHE_HARDLINK: "true"
-      KBUILD_BUILD_USER: "actions"
-      KBUILD_BUILD_HOST: "github.com"
+      KBUILD_BUILD_USER: "NzTm"
+      KBUILD_BUILD_HOST: "Pendi"
       
     steps:
     - name: Checkout source
@@ -44,5 +44,5 @@ jobs:
     - name: Upload zip
       uses: actions/upload-artifact@v4
       with:
-        name: AnyKernel3
+        name: GrimReaper-KernelVeux
         path: "AnyKernel3/"
