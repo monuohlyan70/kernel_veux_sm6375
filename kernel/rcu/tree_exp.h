@@ -552,8 +552,6 @@ static void sync_rcu_exp_select_cpus(void)
 			sync_rcu_exp_select_cpus_flush_work(rnp);
 }
 
-static inline void synchronize_rcu_expedited_destroy_work(struct rcu_exp_work *rew) {}
-
 static void synchronize_sched_expedited_wait(void)
 {
 	int cpu;
